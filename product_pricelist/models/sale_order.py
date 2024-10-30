@@ -3,14 +3,11 @@
 from odoo import models, fields, api
 
 
-class SaleOrderInherited(models.Model):
+class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     note = fields.Text(string="Product Details")
     is_check = fields.Boolean(string="Check")
-    pricelist_ids = fields.Many2many(
-        "product.pricelist", string="Product Pricelists"
-    )
 
     @api.onchange("partner_id")
     def onchange_partner_id(self):
@@ -41,6 +38,7 @@ class SaleOrderInherited(models.Model):
                     line.pricelist_id = (
                         self.pricelist_id.id if self.pricelist_id else False
                     )
+                line.onchange_pricelist_id()
 
     @api.depends("partner_id", "company_id")
     def _compute_pricelist_id(self):

@@ -12,9 +12,6 @@
                         string="Get Product Details"
                         class="btn-primary" invisible="is_check == True"/>
             </button>
-            <xpath expr="//field[@name='payment_term_id']" position="after">
-                <field name="pricelist_ids" widget="many2many_tags" invisible="1"/>
-            </xpath>
             <xpath expr="//field[@name='pricelist_id']" position="attributes">
                 <attribute name="context">{'partner_id': partner_id, 'date_order' : date_order, 'company_id' :
                     company_id}
@@ -37,3 +34,4 @@
         </field>
     </record>
 </odoo>
+

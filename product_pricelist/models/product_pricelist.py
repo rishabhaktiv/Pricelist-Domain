@@ -3,15 +3,12 @@
 from odoo import models, fields, api
 
 
-class ProductPricelistInherited(models.Model):
+class ProductPricelist(models.Model):
     _inherit = "product.pricelist"
 
     start_date = fields.Datetime(string="Start Date")
     end_date = fields.Datetime(string="End Date")
     partner_id = fields.Many2one("res.partner", string="Customer")
-    current_date = fields.Datetime(
-        string="Current Date", default=fields.Datetime.now
-    )
 
     @api.model
     def _search(
@@ -35,4 +32,6 @@ class ProductPricelistInherited(models.Model):
                 ("end_date", "=", False),
                 ("end_date", ">=", date_order),
             ]
-        return super()._search(domain, offset, limit, order, access_rights_uid)
+        return super()._search(domain, offset, limit, order, access_rights_uid
+                               )
+

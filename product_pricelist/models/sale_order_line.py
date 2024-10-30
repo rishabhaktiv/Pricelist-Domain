@@ -3,7 +3,7 @@
 from odoo import models, fields, api
 
 
-class SaleOrderInherited(models.Model):
+class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
     pricelist_id = fields.Many2one("product.pricelist", string="Pricelist")
@@ -26,7 +26,7 @@ class SaleOrderInherited(models.Model):
                     lambda item: item.fixed_price == min_price
                 )
                 if min_pricelist_item:
-                    self.pricelist_id = min_pricelist_item[-1].pricelist_id.id
+                    self.pricelist_id = min_pricelist_item.pricelist_id.id
                     self.price_unit = min_price
                 else:
                     self.pricelist_id = self.order_id.pricelist_id.id
@@ -36,3 +36,20 @@ class SaleOrderInherited(models.Model):
                     if self.order_id.pricelist_id
                     else False
                 )
+
+    @api.onchange("pricelist_id")
+    def onchange_pricelist_id(self):
+        """Method to update the price unit based on the selected pricelist."""
+        if self.pricelist_id:
+            import pdb
+
+            pdb.set_trace()
+            pricelist_items = self.pricelist_id.item_ids.filtered(
+                lambda l: l.product_tmpl_id == self.product_id.product_tmpl_id
+            )
+            if pricelist_items:
+                self.price_unit = pricelist_items[0].fixed_price
+            else:
+                self.price_unit = self.product_id.list_price
+        else:
+            self.price_unit = self.product_id.list_price
