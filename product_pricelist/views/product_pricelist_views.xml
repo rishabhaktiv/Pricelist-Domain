@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Custom Fields For the Pricelist -->
+    <record id="product_pricelist_form_inherit_pp" model="ir.ui.view">
+        <field name="name">product.pricelist.form.inherit.pp</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='active']" position="after">
+                <group>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="partner_id"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+
