@@ -6,7 +6,7 @@ from odoo import models, fields, api
 class ProductPricelist(models.Model):
     _inherit = "product.pricelist"
 
-    start_date = fields.Datetime(string="Start Date")
+    start_date = fields.Datetime(string="Start Date", required=True)
     end_date = fields.Datetime(string="End Date")
     partner_id = fields.Many2one("res.partner", string="Customer")
 

@@ -41,15 +41,10 @@ class SaleOrderLine(models.Model):
     def onchange_pricelist_id(self):
         """Method to update the price unit based on the selected pricelist."""
         if self.pricelist_id:
-            import pdb
-
-            pdb.set_trace()
             pricelist_items = self.pricelist_id.item_ids.filtered(
                 lambda l: l.product_tmpl_id == self.product_id.product_tmpl_id
             )
-            if pricelist_items:
-                self.price_unit = pricelist_items[0].fixed_price
-            else:
-                self.price_unit = self.product_id.list_price
+            self.price_unit = pricelist_items[0].fixed_price \
+                if pricelist_items else self.product_id.list_price
         else:
             self.price_unit = self.product_id.list_price

@@ -3,8 +3,8 @@
 {
     "name": "Product Pricelist",
     "version": "17.0.1.0.3",
-    "category": "Product",
-    "summary": "Price of Product",
+    "category": "Sale",
+    "summary": "The Module Update the Product Price Based on the Pricelist",
     "description": """
         Product Pricelist
         ========================================
@@ -14,7 +14,7 @@
     "author": "Aktiv Software",
     "company": "Aktiv Software",
     "website": "https://www.aktivsoftware.com",
-    "depends": ["sale_management", "product"],
+    "depends": ["sale_management", "stock"],
     "data": [
         "views/product_pricelist_views.xml",
         "views/sale_order_views.xml",

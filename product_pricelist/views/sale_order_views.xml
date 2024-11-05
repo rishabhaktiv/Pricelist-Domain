@@ -10,7 +10,7 @@
             <button name="action_quotation_send" position="after">
                 <button name="get_product_details" type="object"
                         string="Get Product Details"
-                        class="btn-primary" invisible="is_check == True"/>
+                        class="btn-primary" invisible="note"/>
             </button>
             <xpath expr="//field[@name='pricelist_id']" position="attributes">
                 <attribute name="context">{'partner_id': partner_id, 'date_order' : date_order, 'company_id' :

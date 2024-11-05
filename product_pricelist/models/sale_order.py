@@ -76,7 +76,8 @@ class SaleOrder(models.Model):
         product_list = (
             self.env["product.template"]
             .search([])
-            .filtered(lambda l: l.categ_id.property_cost_method == "standard")
+            .filtered(lambda l: l.categ_id and l.categ_id
+                      .property_cost_method == "standard")
         )
         if product_list:
             product_name_list = product_list.mapped("name")
